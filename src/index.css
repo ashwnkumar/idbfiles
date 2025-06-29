@@ -1,0 +1,122 @@
+@import "tailwindcss";
+
+@theme {
+  --color-brand: #5073e1;
+  --color-brand-hover: #3f5ccc;
+  --color-brand-faded: #e7ebfc;
+  --color-brand-disabled: #aabcf2;
+
+  --color-gray: #d0d5dd;
+  --color-hover: #f0f0f0;
+  --color-main: #f9f9f9;
+
+  --color-heading: #101828;
+  --color-secondary: #344054;
+  --color-placeholder: #667085;
+
+  --color-danger: #f04438;
+  --color-danger-hover: #d63b32;
+  --color-danger-faded: #fef3f2;
+
+  --color-success: #12b76a;
+  --color-success-hover: #0fa35f;
+  --color-success-faded: #ecfdf3;
+
+  --color-warning: #f79009;
+  --color-warning-hover: #db7f07;
+  --color-warning-faded: #fffaeb;
+
+  --color-neutral: #3538cd;
+  --color-neutral-hover: #2c2fb1;
+  --color-neutral-faded: #eef4ff;
+
+  --color-white: #ffffff;
+}
+
+:root,
+[theme="light"] {
+  --color-brand: #5073e1;
+  --color-brand-hover: #3f5ccc;
+  --color-brand-faded: #e7ebfc;
+  --color-brand-disabled: #aabcf2;
+
+  --color-gray: #d0d5dd;
+  --color-hover: #f0f0f0;
+  --color-main: #f9f9f9;
+
+  --color-heading: #101828;
+  --color-secondary: #344054;
+  --color-placeholder: #667085;
+
+  --color-danger: #f04438;
+  --color-danger-hover: #d63b32;
+  --color-danger-faded: #fef3f2;
+
+  --color-success: #12b76a;
+  --color-success-hover: #0fa35f;
+  --color-success-faded: #ecfdf3;
+
+  --color-warning: #f79009;
+  --color-warning-hover: #db7f07;
+  --color-warning-faded: #fffaeb;
+
+  --color-neutral: #3538cd;
+  --color-neutral-hover: #2c2fb1;
+  --color-neutral-faded: #eef4ff;
+
+  --color-white: #ffffff;
+}
+
+[theme="dark"] {
+  --color-brand: #6c8dff;
+  --color-brand-hover: #88a1ff;
+  --color-brand-faded: #1a2338;
+  --color-brand-disabled: #3b4d78;
+
+  --color-gray: #4b5565;
+  --color-hover: #2d2f36;
+  --color-main: #101318;
+
+  --color-heading: #e3e8f0;
+  --color-secondary: #c6cbd4;
+  --color-placeholder: #a1a9b8;
+
+  --color-danger: #f04438;
+  --color-danger-hover: #ff665c;
+  --color-danger-faded: #3a1a1a;
+
+  --color-success: #32d583;
+  --color-success-hover: #4fe29c;
+  --color-success-faded: #1c3729;
+
+  --color-warning: #ffb020;
+  --color-warning-hover: #ffc14d;
+  --color-warning-faded: #4a3720;
+
+  --color-neutral: #8a8df0;
+  --color-neutral-hover: #a4a7f5;
+  --color-neutral-faded: #1e223d;
+
+  --color-white: #0c0e12;
+}
+
+/* Custom scrollbar for webkit-based browsers (Chrome, Safari, Edge) */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 3px;
+  height: 40px;
+  border-radius: 10px !important;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background-color: #d5d6d6;
+  border-radius: 10px !important;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+.custom-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-gray) transparent;
+}
