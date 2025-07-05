@@ -16,7 +16,7 @@ const FileUpload = ({ handleUpload }) => {
 
   return (
     <label
-      className={`bg-main flex flex-col items-center justify-center w-full p-10 py-15 border-2 ${
+      className={`bg-main flex flex-col items-center justify-center w-full p-10 py-15 text-center border-2 ${
         isDragging ? "border-brand bg-brand" : "border-gray"
       } border-dashed rounded-lg cursor-pointer hover:border-brand transition`}
       onDragOver={(event) => {
@@ -32,7 +32,10 @@ const FileUpload = ({ handleUpload }) => {
       <input
         type="file"
         ref={inputRef}
-        onChange={handleUpload}
+        onChange={(e) => {
+          handleUpload(e);
+          e.target.value = null;
+        }}
         className="hidden"
       />
     </label>

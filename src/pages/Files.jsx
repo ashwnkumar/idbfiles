@@ -5,7 +5,7 @@ import Button from "../components/Button";
 import { Download, Eye, Trash2 } from "lucide-react";
 import FileUpload from "../components/FileUpload";
 
-const DB_NAME = "file_storage_db";
+const DB_NAME = "IDBFiles";
 const DB_VERSION = 1;
 const STORE_NAME = "files";
 
@@ -44,6 +44,7 @@ const Files = () => {
   const [files, setFiles] = useState([]);
   const [previewFile, setPreviewFile] = useState(null);
   const [deleteModal, setDeleteModal] = useState(null);
+  const [clearModal, setClearModal] = useState(false);
 
   useEffect(() => {
     const openDB = async () => {
@@ -92,7 +93,9 @@ const Files = () => {
   const handleUpload = async (e) => {
     const file = e.target.files[0];
     if (!file || !db) {
-      toast.error("No file selected or DB not ready");
+      toast.error(
+        "Something went wrong. Please try again or refresh if the issue persists."
+      );
       return;
     }
 
@@ -166,6 +169,7 @@ const Files = () => {
       indexedDB.deleteDatabase(DB_NAME);
       setFiles([]);
       setDb(null);
+      setClearModal(false);
       toast.success("Storage cleared successfully");
     } catch (error) {
       toast.error("Failed to clear storage");
@@ -219,24 +223,40 @@ const Files = () => {
     },
   ];
 
+  const clearModalButtons = [
+    {
+      label: "Cancel",
+      onClick: () => setClearModal(false),
+      variant: "outline",
+    },
+    {
+      label: "Clear",
+      onClick: handleClearStorage,
+      variant: "danger",
+    },
+  ];
+
   return (
-    <div className="w-full">
-      <div className="flex items-center justify-between mb-5">
-        <h1 className="text-2xl font-medium ">
+    <div className="w-full h-full px-4 sm:px-6">
+      <div className="flex flex-col md:flex-row items-center  justify-between mb-5 gap-4 sm:gap-0">
+        <h1 className="text-xl sm:text-2xl font-medium text-center sm:text-left w-full whitespace-nowrap">
           {files.length > 0
             ? "Find your files here"
             : "No files added. Click the button to upload"}
         </h1>
+
         {files.length > 0 && (
           <Button
             icon={Trash2}
-            label={"Clear Storage"}
-            onClick={handleClearStorage}
-            variant={"danger"}
+            label="Clear Storage"
+            onClick={() => setClearModal(true)}
+            variant="danger"
           />
         )}
       </div>
+
       <FileUpload handleUpload={handleUpload} />
+
       <ul className="my-4 flex flex-col items-center justify-center w-full gap-3">
         {files.map((file) => {
           const { isImg, url } = getPreviewData(file);
@@ -244,9 +264,9 @@ const Files = () => {
           return (
             <li
               key={file.id}
-              className="w-full flex justify-between items-center hover:bg-hover/50 p-2 rounded"
+              className="w-full flex flex-col sm:flex-row justify-between items-start sm:items-center hover:bg-hover/50 p-2 rounded gap-3 sm:gap-0"
             >
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-2 w-full">
                 {isImg ? (
                   <img
                     src={url}
@@ -258,12 +278,13 @@ const Files = () => {
                 )}
                 <span
                   onClick={() => setPreviewFile(file)}
-                  className="hover:underline underline-offset-4 cursor-pointer"
+                  className="hover:underline underline-offset-4 cursor-pointer break-words"
                 >
                   {file.name}
                 </span>
               </div>
-              <div className="flex gap-2">
+
+              <div className="flex self-end sm:self-auto">
                 <Button
                   icon={Download}
                   onClick={() => handleDownload(file)}
@@ -287,8 +308,10 @@ const Files = () => {
         })}
       </ul>
 
+      {/* Modals */}
       <ModalComponent
         title="Delete File?"
+        message="Are you sure you want to delete this file? This action cannot be undone."
         buttons={deleteModalButtons}
         isOpen={deleteModal}
         setIsOpen={setDeleteModal}
@@ -301,6 +324,14 @@ const Files = () => {
       >
         {renderPreviewContent(previewFile)}
       </ModalComponent>
+
+      <ModalComponent
+        isOpen={clearModal}
+        setIsOpen={setClearModal}
+        title="Clear Storage?"
+        message="Are you sure you want to clear the storage? This action cannot be undone."
+        buttons={clearModalButtons}
+      />
     </div>
   );
 };

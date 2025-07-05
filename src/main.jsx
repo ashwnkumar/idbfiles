@@ -3,10 +3,13 @@ import { createRoot } from "react-dom/client";
 import "./index.css";
 import App from "./pages/App";
 import { Toaster } from "react-hot-toast";
+import Layout from "./pages/Layout";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <App />
+    <Layout>
+      <App />
+    </Layout>
     <Toaster
       toastOptions={{
         style: {
