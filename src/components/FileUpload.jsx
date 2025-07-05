@@ -28,6 +28,7 @@ const FileUpload = ({ handleUpload }) => {
     >
       <div className="flex flex-col items-center justify-center ">
         <p className="text-xl">Drag and drop or click to upload</p>
+        <p className="text-heading/70">Maximum file size: 100MB</p>
       </div>
       <input
         type="file"

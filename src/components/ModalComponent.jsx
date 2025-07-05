@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { X } from "lucide-react";
 import Button from "./Button";
 
+
 const ModalComponent = ({
   title = "Modal Title",
   desc,
@@ -33,7 +34,7 @@ const ModalComponent = ({
       style={{ zIndex: 999999 }}
     >
       <div
-        className="bg-white rounded-md w-full max-w-xl max-h-[85vh] flex flex-col px-5 py-3 m-3 overflow-hidden border border-gray/50"
+        className="bg-white rounded-md w-full max-w-xl max-h-[80vh] flex flex-col px-5 py-3 m-3 overflow-hidden border border-gray/50"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}

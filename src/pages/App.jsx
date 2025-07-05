@@ -4,11 +4,13 @@ import Files from "./FIles";
 import SectionButton from "../components/SectionButton";
 import Button from "../components/Button";
 import { Moon, Sun } from "lucide-react";
+import Loader from "../components/Loader";
 
 const sections = ["files", "about"];
 
 const App = () => {
   const [section, setSection] = useState(sections[0]);
+  const [loading, setLoading] = useState(false);
 
   return (
     <div className="flex flex-col items-center justify-start gap-4 w-full h-screen  px-4 md:px-8 custom-scrollbar">
@@ -24,8 +26,9 @@ const App = () => {
       </nav>
 
       <main className="w-full max-w-6xl flex flex-col items-center justify-start gap-4">
-        {section === "files" ? <Files /> : <About />}
+        {section === "files" ? <Files setLoading={setLoading} /> : <About />}
       </main>
+      <Loader loading={loading} />
     </div>
   );
 };
